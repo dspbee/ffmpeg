@@ -291,10 +291,10 @@ gdigrab_read_header(AVFormatContext *s1)
         virtual_rect.bottom = virtual_rect.bottom * desktopvertres / vertres;
     } else {
         /* desktop -- get the right height and width for scaling DPI */
-        virtual_rect.left = GetSystemMetrics(SM_XVIRTUALSCREEN);
-        virtual_rect.top = GetSystemMetrics(SM_YVIRTUALSCREEN);
-        virtual_rect.right = (virtual_rect.left + GetSystemMetrics(SM_CXVIRTUALSCREEN)) * desktophorzres / horzres;
-        virtual_rect.bottom = (virtual_rect.top + GetSystemMetrics(SM_CYVIRTUALSCREEN)) * desktopvertres / vertres;
+        virtual_rect.left = GetSystemMetrics(SM_XVIRTUALSCREEN) * desktophorzres / horzres;
+        virtual_rect.top = GetSystemMetrics(SM_YVIRTUALSCREEN) * desktopvertres / vertres;
+        virtual_rect.right = (GetSystemMetrics(SM_XVIRTUALSCREEN) + GetSystemMetrics(SM_CXVIRTUALSCREEN)) * desktophorzres / horzres;
+        virtual_rect.bottom = (GetSystemMetrics(SM_YVIRTUALSCREEN) + GetSystemMetrics(SM_CYVIRTUALSCREEN)) * desktopvertres / vertres;
     }
 
     /* If no width or height set, use full screen/window area */
